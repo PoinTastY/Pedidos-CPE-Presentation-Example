@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PedidosCPE.Presentation.Views.SearchProductosView"
+             Title="Busqueda de productos">
+    
+    <Grid RowDefinitions="Auto, *"
+          ColumnDefinitions="2*, 3*">
+
+        <!-- Parte izquierda: Barra de búsqueda y lista -->
+        <VerticalStackLayout Grid.Column="0" Padding="10">
+            <!-- Barra de búsqueda -->
+            <SearchBar x:Name="searchBar" Placeholder="Buscar Producto..." SearchButtonPressed="searchBar_SearchButtonPressed"/>
+
+            <!-- Lista de resultados -->
+            <CollectionView x:Name="resultList" ItemsSource="{Binding ProductosEncontrados}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <ContentView>
+                            <!-- Personaliza tu vista de item aquí -->
+                            <StackLayout Orientation="Horizontal" Padding="5">
+                                <Label Text="{Binding CNOMBREPRODUCTO}" VerticalOptions="Center"/>
+                                <!-- Puedes agregar más controles aquí para personalizar el ítem -->
+                            </StackLayout>
+                        </ContentView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+
+        <!-- Parte derecha: Botones y lista de seleccionados -->
+        <VerticalStackLayout Grid.Column="1" Padding="10">
+            <!-- Botones para agregar y eliminar -->
+            <HorizontalStackLayout HorizontalOptions="End" Spacing="10">
+                <Button Text="Eliminar Producto Seleccionado" Command="{Binding EliminarProductoSeleccionado}" />
+            </HorizontalStackLayout>
+
+            <!-- Lista de seleccionados -->
+            <CollectionView x:Name="selectedList" ItemsSource="{Binding ProductosSeleccionados}" Grid.Row="1">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <ContentView>
+                            <!-- Personaliza tu vista de item aquí -->
+                            <StackLayout Orientation="Horizontal" Padding="5">
+                                <Label Text="{Binding CNOMBREPRODUCTO}" VerticalOptions="Center"/>
+                            </StackLayout>
+                        </ContentView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>
