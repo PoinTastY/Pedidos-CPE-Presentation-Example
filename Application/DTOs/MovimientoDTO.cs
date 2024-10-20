@@ -1,10 +1,11 @@
-﻿using Domain.Entities;
-using Domain.Entities.Estructuras;
+﻿using Domain.Entities.ContpaqiComercial;
+using Domain.Entities.ContpaqiComercial.Estructuras;
+using Domain.Entities.Interface;
 using Domain.SDK_Comercial;
 using Newtonsoft.Json;
 using System.Runtime.InteropServices;
 
-namespace Application.DTOs
+namespace ApplicationLayer.DTOs
 {
     public class MovimientoDTO
     {
@@ -13,7 +14,7 @@ namespace Application.DTOs
         public int CIDPRODUCTO { get; set; }
         public int CIDALMACEN { get; set; }
         public double CUNIDADES { get; set; }
-        public MovimientoDTO(string aCodProdSer, string aCodAlmacen, string aReferenciaMov, string aCodClasificacion, double unidades) 
+        public MovimientoDTO(string aCodProdSer, string aCodAlmacen, string aReferenciaMov, string aCodClasificacion, double unidades)
         {
             this.aCodAlmacen = aCodAlmacen;
             this.aCodProdSer = aCodProdSer;
@@ -23,6 +24,13 @@ namespace Application.DTOs
         }
 
         public MovimientoDTO() { }
+        public MovimientoDTO(Movimiento movimiento)
+        {
+            aCodProdSer = movimiento.CodigoProducto;
+            aCodAlmacen = movimiento.CodigoAlmacen;
+            CUNIDADES = movimiento.Unidades;
+            aReferenciaMov = movimiento.Referencia;
+        }
 
         public MovimientoDTO(MovimientoSQL movimiento)
         {
@@ -41,12 +49,12 @@ namespace Application.DTOs
         public tMovimiento GetSDKMovementStruct()
         {
             return new tMovimiento
-            { 
-                aUnidades = this.CUNIDADES,
-                aCodProdSer = this.aCodProdSer,
-                aCodAlmacen = this.aCodAlmacen,
-                aReferencia = this.aReferenciaMov,
-                aCodClasificacion = this.aCodClasificacion
+            {
+                aUnidades = CUNIDADES,
+                aCodProdSer = aCodProdSer,
+                aCodAlmacen = aCodAlmacen,
+                aReferencia = aReferenciaMov,
+                aCodClasificacion = aCodClasificacion
             };
         }
     }

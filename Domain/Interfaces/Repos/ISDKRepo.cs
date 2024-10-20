@@ -1,8 +1,8 @@
-﻿using Domain.Entities;
-using Domain.Entities.Estructuras;
+﻿using Domain.Entities.ContpaqiComercial;
+using Domain.Entities.ContpaqiComercial.Estructuras;
 using Domain.SDK_Comercial;
 
-namespace Domain.Interfaces
+namespace Domain.Interfaces.Repos
 {
     public interface ISDKRepo
     {

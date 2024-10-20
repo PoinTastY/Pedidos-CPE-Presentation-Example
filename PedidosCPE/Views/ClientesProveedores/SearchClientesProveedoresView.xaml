@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ApplicationLayer.ViewModels;assembly=ApplicationLayer"
+             x:Class="PedidosCPE.Views.ClientesProveedores.SearchClientesProveedoresView"
+             Title="SearchClientesProveedoresView">
+
+    <ContentPage.BindingContext>
+        <vm:VMSearchClienteProveedor/>
+    </ContentPage.BindingContext>
+
+    <StackLayout Orientation="Vertical" Grid.Column="0" Padding="10" >
+        <!-- Barra de búsqueda -->
+        
+        <StackLayout Orientation="Horizontal" Padding="10" BackgroundColor="LightSlateGrey">
+            <SearchBar x:Name="searchBar" Placeholder="Buscar Socio..." SearchButtonPressed="searchBar_SearchButtonPressed"
+                       TextChanged="searchBar_TextChanged" Margin="0,0,0,15"/>
+            
+            <Button Text="Seleccionar Socio" IsEnabled="False" x:Name="BtnSeleccionarCteProv" Clicked="BtnSeleccionarCteProv_Clicked"/>
+        </StackLayout>
+
+        <ScrollView>
+            <CollectionView x:Name="resultList" ItemsSource="{Binding ClientesProveedoresEncontrados}"
+                        SelectionChanged="resultList_SelectionChanged"
+                        SelectionMode="Single"
+                        HeightRequest="569">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <ContentView>
+                            <!-- Personaliza tu vista de item aquí -->
+                            <StackLayout Orientation="Horizontal" Padding="10">
+                                <Label Text="{Binding CRAZONSOCIAL}" VerticalOptions="Center"
+                                        HorizontalOptions="StartAndExpand"/>
+                                <Label Text="{Binding CCODIGOCLIENTE}" VerticalOptions="Center" HorizontalOptions="End"/>
+                                <!-- Puedes agregar más controles aquí para personalizar el ítem -->
+                            </StackLayout>
+                        </ContentView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+
+    </StackLayout>
+</ContentPage>

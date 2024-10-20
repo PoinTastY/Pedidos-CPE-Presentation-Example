@@ -1,4 +1,6 @@
-﻿using PedidosCPE.Presentation.Views;
+﻿using PedidosCPE.Views.ClientesProveedores;
+using PedidosCPE.Views.Documentos;
+using PedidosCPE.Views.Productos;
 
 namespace PedidosCPE
 {
@@ -7,8 +9,11 @@ namespace PedidosCPE
         public AppShell()
         {
             InitializeComponent();
-            //register routes
+
+            //routing
             Routing.RegisterRoute(nameof(SearchProductosView), typeof(SearchProductosView));
+            Routing.RegisterRoute(nameof(CreateDocumentoView), typeof(CreateDocumentoView));
+            Routing.RegisterRoute(nameof(SearchClientesProveedoresView), typeof(SearchClientesProveedoresView));
         }
     }
 }

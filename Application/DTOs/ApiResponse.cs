@@ -1,4 +1,4 @@
-﻿namespace Application.DTOs
+﻿namespace ApplicationLayer.DTOs
 {
     public class ApiResponse
     {

@@ -1,4 +1,4 @@
-﻿using Domain.Entities.Estructuras;
+﻿using Domain.Entities.ContpaqiComercial.Estructuras;
 using System.Runtime.InteropServices;
 using System.Text;
 

@@ -1,35 +1,25 @@
-﻿namespace Domain.Interfaces.Services.ApiServices.Documentos
+﻿using Domain.Entities.Interface;
+
+namespace Domain.Interfaces.Services.ApiServices.Documentos
 {
     public interface IDocumentoService
     {
         /// <summary>
-        /// Get a document by its concepto, serie and folio
-        /// </summary>
-        /// <param name="concepto"></param>
-        /// <param name="serie"></param>
-        /// <param name="folio"></param>
-        /// <returns>DocumentDTO, parsed from the data from the apiresponse</returns>
-        /// <exception cref="Exception"></exception>
-        Task<T> GetDocumentoByConceptoSerieAndFolioSDKAsync<T>(string codConcepto, string serie, string folio);
-
-        /// <summary>
-        /// Get a document by its id, asking the SDK
-        /// </summary>
-        /// <param name="idDocumento"></param>
-        /// <returns>DocumentDTO parsed form the ApiResponse Data atrbute</returns>
-        /// <exception cref="Exception"></exception>
-        Task<T> GetDocumentByIdSDKAsync<T>(int idDocumento);
-
-        /// <summary>
-        /// Get a document by its id, filtering date, filtering by CPE requirements
+        /// Posts a document and its movements to the SDK
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="fechaInicio"></param>
-        /// <param name="fechaFin"></param>
-        /// <param name="serie"></param>
-        /// <returns>List of documents</returns>
-        Task<List<T>> GetPedidosByFechaSerieCPESQL<T>(DateTime fechaInicio, DateTime fechaFin, string serie);
+        /// <param name="documentDTO"></param>
+        /// <param name="movementsDTO"></param>
+        /// <returns></returns>
+        Task<T> PostDocumentAndMovementsSDK<T>(T documentDTO, List<T> movementsDTO);
 
-        Task<T> PutDocumentAndMovements<T>(T documentDTO, List<T> movementsDTO);
+        /// <summary>
+        /// 
+        /// Agrega un documento pendiente y sus movimientos a la base de datos postgres
+        /// </summary>
+        /// <param name="pedido"></param>
+        /// <param name="movementsDTO"></param>
+        /// <returns>Id del documento creado</returns>
+        Task<int> PostPendingDocumentAndMovementsPostgres<TDoc, TMov>(TDoc documento, List<TMov> movimientos);
     }
 }

@@ -2,11 +2,11 @@
 {
     public class SDKSettings
     {
-        public string RutaBinarios { get; set; } = string.Empty;
-        public string NombrePAQ { get; set; } = string.Empty;
-        public string RutaEmpresa { get; set; } = string.Empty;
-        public string User { get; set; } = string.Empty;
-        public string Password { get; set; } = string.Empty;
-        public string SQLConnectionString { get; set; } = string.Empty;
+        public string CodConcepto { get; set; } = string.Empty;
+        public string Serie { get; set; } = string.Empty;
+        public string CodigoCteProv { get; set; } = string.Empty;
+        public string Referencia { get; set; } = string.Empty;
+        public string ServerUri { get; set; } = string.Empty;
+        public SDKSettings() { }
     }
 }

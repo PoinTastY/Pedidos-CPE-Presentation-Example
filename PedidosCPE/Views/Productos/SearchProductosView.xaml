@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ApplicationLayer.ViewModels;assembly=ApplicationLayer"
+             x:Class="PedidosCPE.Views.Productos.SearchProductosView"
+             Title="Buscar y Seleccionar Productos">
+    <ContentPage.BindingContext>
+        <vm:VMSearchProductos/>
+    </ContentPage.BindingContext>
+
+    <Grid ColumnDefinitions="3*, 2*"
+          RowDefinitions="10*, *">
+
+        <StackLayout Grid.Column="0" Padding="10" >
+            <!-- Barra de búsqueda -->
+            <SearchBar x:Name="searchBar" Placeholder="Buscar Producto..." SearchButtonPressed="searchBar_SearchButtonPressed"
+                           TextChanged="searchBar_TextChanged" Margin="0,0,0,15"/>
+            <StackLayout Orientation="Horizontal" Padding="10" BackgroundColor="LightSlateGrey">
+                <Label Text="Nombre" HorizontalOptions="StartAndExpand"/>
+                <Label Text="Precio"/>
+            </StackLayout>
+
+            <ScrollView>
+                <CollectionView x:Name="resultList" ItemsSource="{Binding ProductosEncontrados}"
+                                SelectionChanged="resultList_SelectionChanged"
+                                SelectionMode="Single"
+                                HeightRequest="569">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <ContentView>
+                                <!-- Personaliza tu vista de item aquí -->
+                                <StackLayout Orientation="Horizontal" Padding="10">
+                                    <Label Text="{Binding CNOMBREPRODUCTO}" VerticalOptions="Center"
+                                                HorizontalOptions="StartAndExpand"/>
+                                    <Label Text="{Binding CPRECIO1}" VerticalOptions="Center" HorizontalOptions="End"/>
+                                    <!-- Puedes agregar más controles aquí para personalizar el ítem -->
+                                </StackLayout>
+                            </ContentView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
+     
+        </StackLayout>
+
+        <!-- Parte derecha: Botones y lista de seleccionados -->
+        <VerticalStackLayout Grid.Column="1" Padding="10">
+            <!-- Botones para agregar y eliminar -->
+            <HorizontalStackLayout HorizontalOptions="End" Spacing="10">
+                <Button Text="Eliminar Producto Seleccionado" 
+                            IsEnabled="False" 
+                            Clicked="BtnEliminarSeleccionado_Clicked"
+                            x:Name="BtnEliminarSeleccionado"/>
+            </HorizontalStackLayout>
+
+            <!-- Lista de seleccionados -->
+            <CollectionView x:Name="selectedList" ItemsSource="{Binding ProductosSeleccionados}" Grid.Row="1"
+                            SelectionMode="Single"
+                            SelectionChanged="selectedList_SelectionChanged"
+                            HeightRequest="569">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <ContentView>
+                            <!-- Personaliza tu vista de item aquí -->
+                            <StackLayout Orientation="Horizontal" Padding="5">
+                                <Label Text="{Binding CNOMBREPRODUCTO}" VerticalOptions="Center"/>
+                            </StackLayout>
+                        </ContentView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+        <Button Text="Confirmar Seleccion"
+                x:Name="BtnConfirmarSeleccion"
+                Clicked="BtnConfirmarSeleccion_Clicked"
+                Grid.Row="1"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"/>
+    </Grid>
+</ContentPage>

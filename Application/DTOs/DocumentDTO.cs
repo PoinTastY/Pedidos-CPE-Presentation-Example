@@ -1,7 +1,8 @@
-﻿using Domain.Entities;
-using Domain.Entities.Estructuras;
+﻿using Domain.Entities.ContpaqiComercial;
+using Domain.Entities.ContpaqiComercial.Estructuras;
+using Domain.Entities.Interface;
 
-namespace Application.DTOs
+namespace ApplicationLayer.DTOs
 {
     public class DocumentDTO
     {
@@ -104,6 +105,34 @@ namespace Application.DTOs
             aGasto1 = documento.aGasto1;
             aGasto2 = documento.aGasto2;
             aGasto3 = documento.aGasto3;
+        }
+
+        public DocumentDTO(Documento pedido)
+        {
+            aFolio = pedido.Folio;
+            aNumMoneda = pedido.NumMoneda;
+            aTipoCambio = pedido.TipoCambio;
+            aImporte = pedido.Importe;
+            aDescuentoDoc1 = pedido.DescuentoDoc1;
+            aDescuentoDoc2 = pedido.DescuentoDoc2;
+            aSistemaOrigen = pedido.SistemaOrigen;
+            aCodConcepto = pedido.CodConcepto;
+            aSerie = pedido.Serie;
+            aFecha = pedido.Fecha;
+            aCodigoCteProv = pedido.CodigoCteProv;
+            aCodigoAgente = pedido.CodigoAgente;
+            aReferencia = pedido.Referencia;
+            aAfecta = pedido.Afecta;
+            aGasto1 = pedido.Gasto1;
+            aGasto2 = pedido.Gasto2;
+            aGasto3 = pedido.Gasto3;
+            CIDDOCUMENTO = pedido.IdContpaqiSQL;
+            CFECHA = DateTime.Parse(pedido.Fecha);
+            COBSERVACIONES = pedido.Observaciones;
+            CTEXTOEXTRA1 = pedido.TextoExtra1;
+            CTEXTOEXTRA2 = pedido.TextoExtra2;
+            CTEXTOEXTRA3 = pedido.TextoExtra3;
+            CIMPRESO = pedido.Impreso ? 1 : 0;
         }
 
         public DocumentDTO(DocumentSQL documento)
