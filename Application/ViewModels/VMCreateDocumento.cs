@@ -70,8 +70,10 @@ namespace ApplicationLayer.ViewModels
             var movimientos = new List<Movimiento>();
             foreach (var producto in Productos)
             {
-                movimientos.Add(new Movimiento(producto.CCODIGOPRODUCTO, "2", 10, Documento.Referencia));
+                movimientos.Add(new Movimiento(producto.CCODIGOPRODUCTO, _settings.CodigoAlmacen, 10, Documento.Referencia));
             }
+
+            Documento.RazonSocial = ClienteProveedorSeleccionado.CRAZONSOCIAL;
 
             Documento.IdInterfaz = await _documentoService.PostPendingDocumentAndMovementsPostgres<Documento, Movimiento>(Documento, movimientos);
             OnPropertyChanged(nameof(Documento));

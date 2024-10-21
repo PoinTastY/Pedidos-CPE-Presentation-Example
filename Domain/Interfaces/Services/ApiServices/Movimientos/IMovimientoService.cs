@@ -1,4 +1,6 @@
-﻿namespace Domain.Interfaces.Services.ApiServices.Movimientos
+﻿using Domain.Entities.Interface;
+
+namespace Domain.Interfaces.Services.ApiServices.Movimientos
 {
     public interface IMovimientoService
     {
@@ -8,7 +10,7 @@
         /// <param name="idDocumento"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        Task<List<T>> GetMovimientosByIdDocumentoSQLAsync<T>(int idDocumento);
+        Task<List<Movimiento>> GetMovimientosByDocumentoId(int idDocumento);
 
         /// <summary>
         /// Updates the movement with the provided id, with the provided unidades
@@ -16,6 +18,6 @@
         /// <param name="idMovimiento"></param>
         /// <param name="unidades"></param>
         /// <returns>Completed task and the message form the api</returns>
-        Task<string> UpdateUnidadesMovimiento(int idMovimiento, double unidades);
+        Task UpdateMovimientos(List<Movimiento> movimientos);
     }
 }

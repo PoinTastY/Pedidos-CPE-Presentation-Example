@@ -26,7 +26,7 @@ namespace Infrastructure.Services.API.Documentos
             var content = new StringContent(JsonConvert.SerializeObject(payload), Encoding.UTF8, "application/json");
 
             // Enviar el payload al API
-            var response = await _client.PostAsync("/Documentos", content);
+            var response = await _client.PostAsync("/DocumentosSDK", content);
 
             //Retornar desempaquetado
             return await ApiTools.DeserializeResponse<T>(response);
@@ -44,5 +44,12 @@ namespace Infrastructure.Services.API.Documentos
 
             return await ApiTools.DeserializeResponse<int>(response);
         }
+
+        public async Task<List<T>> GetDocumentosPendientes<T>()
+        {
+            var response = await _client.GetAsync("/Pendientes");
+            return await ApiTools.DeserializeResponse<List<T>>(response);
+        }
+
     }
 }

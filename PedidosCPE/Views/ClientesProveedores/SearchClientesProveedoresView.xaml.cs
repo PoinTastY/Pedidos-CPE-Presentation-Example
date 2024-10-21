@@ -32,7 +32,11 @@ public partial class SearchClientesProveedoresView : ContentPage
             {
                 _viewModel.ClientesProveedoresEncontrados.Clear();
             }
-
+            if (string.IsNullOrEmpty(searchBar.Text))
+            {
+                await DisplayAlert("Campo Vacío", "Por favor, ingrese algo para buscar", "Ok");
+                return;
+            }
             await _viewModel.SearchClienteProveedorAsync(searchBar.Text);
 
             if (_viewModel.ClientesProveedoresEncontrados.Count == 0)

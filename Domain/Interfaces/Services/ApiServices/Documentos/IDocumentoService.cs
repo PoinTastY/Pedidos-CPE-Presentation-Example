@@ -21,5 +21,13 @@ namespace Domain.Interfaces.Services.ApiServices.Documentos
         /// <param name="movementsDTO"></param>
         /// <returns>Id del documento creado</returns>
         Task<int> PostPendingDocumentAndMovementsPostgres<TDoc, TMov>(TDoc documento, List<TMov> movimientos);
+
+        /// <summary>
+        /// Gets pending documents to work with them
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        Task<List<T>> GetDocumentosPendientes<T>();
+
     }
 }

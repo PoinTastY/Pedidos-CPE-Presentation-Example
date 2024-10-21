@@ -17,5 +17,14 @@ namespace Infrastructure.Services.API.Productos
 
             return await ApiTools.DeserializeResponse<List<T>>(response);
         }
+
+        public async Task<List<T>> GetProductosByCodigos<T>(List<string> codigos)
+        {
+            var query = string.Join("&", codigos.Select(c => $"codigos={Uri.EscapeDataString(c)}"));
+
+            var response = await _client.GetAsync($"/Productos/ByCodigos?{query}");
+
+            return await ApiTools.DeserializeResponse<List<T>>(response);
+        }
     }
 }

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ApplicationLayer.ViewModels;assembly=ApplicationLayer"
+             x:Class="PedidosCPE.Views.Documentos.DispatchDocumentosPendientesView"
+             Title="DispatchDocumentosPendientesView">
+
+    <ContentPage.BindingContext>
+        <vm:VMDispatchDocumentosPendientes/>
+    </ContentPage.BindingContext>
+
+    <StackLayout Orientation="Horizontal">
+        <VerticalStackLayout>
+            <SearchBar x:Name="searchBar" Placeholder="Buscar Documento..." SearchButtonPressed="searchBar_SearchButtonPressed"
+                           TextChanged="searchBar_TextChanged" Margin="0,0,0,15"/>
+            <ScrollView>
+                <CollectionView x:Name="documentosList" ItemsSource="{Binding DocumentosPendientes}"
+                                SelectionChanged="documentosList_SelectionChanged"
+                                SelectionMode="Single"
+                                HeightRequest="569">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <ContentView>
+                                <StackLayout Orientation="Horizontal" Padding="10">
+                                    <Label Text="{Binding IdInterfaz}" VerticalOptions="Center"
+                                                HorizontalOptions="StartAndExpand"/>
+                                    <Label Text="{Binding RazonSocial}" VerticalOptions="Center" HorizontalOptions="End"/>
+                                </StackLayout>
+                            </ContentView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
+        </VerticalStackLayout>
+        <VerticalStackLayout>
+            <CollectionView x:Name="productoSeleccionado" ItemsSource="{Binding ProductosUnidades}" Grid.Row="1"
+                            SelectionMode="Single"
+                            SelectionChanged="productoSeleccionado_SelectionChanged"
+                            HeightRequest="569">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <ContentView>
+                            <StackLayout Orientation="Horizontal" Padding="5">
+                                <Label Text="{Binding Producto.CNOMBREPRODUCTO}" VerticalOptions="Center"/>
+                                <Label Text="{Binding Unidades}" VerticalOptions="Center"/>
+                            </StackLayout>
+                        </ContentView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </StackLayout>
+</ContentPage>

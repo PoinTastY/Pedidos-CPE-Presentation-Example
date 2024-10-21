@@ -19,7 +19,7 @@ namespace Infrastructure.Services.API
             }
             else
             {
-                throw new Exception("Parece que no tuvimos una respuesta Exitosa :c: " + response.ReasonPhrase);
+                throw new Exception($"Parece que no tuvimos una respuesta exitosa para:{response.RequestMessage.RequestUri.LocalPath}: " + response.ReasonPhrase);
             }
         }
     }

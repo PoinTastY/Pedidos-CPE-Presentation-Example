@@ -2,10 +2,12 @@
 using CommunityToolkit.Maui;
 using Domain.Interfaces.Services.ApiServices.ClientesProveedores;
 using Domain.Interfaces.Services.ApiServices.Documentos;
+using Domain.Interfaces.Services.ApiServices.Movimientos;
 using Domain.Interfaces.Services.ApiServices.Productos;
 using Domain.SDK_Comercial;
 using Infrastructure.Services.API.ClientesProveedores;
 using Infrastructure.Services.API.Documentos;
+using Infrastructure.Services.API.Movimientos;
 using Infrastructure.Services.API.Productos;
 using Microsoft.Extensions.Logging;
 using System.Text.Json;
@@ -69,9 +71,16 @@ namespace PedidosCPE
                 return new ClienteProveedorService(httpClientFactory.CreateClient("CommonHttpClient"));
             });
 
+            builder.Services.AddTransient<IMovimientoService, MovimientoService>(sp =>
+            {
+                var httpClientFactory = sp.GetRequiredService<IHttpClientFactory>();
+                return new MovimientoService(httpClientFactory.CreateClient("CommonHttpClient"));
+            });
+
             builder.Services.AddTransient<VMSearchProductos>();
             builder.Services.AddTransient<VMCreateDocumento>();
             builder.Services.AddTransient<VMSearchClienteProveedor>();
+            builder.Services.AddTransient<VMDispatchDocumentosPendientes>();
         }
 
         private static SDKSettings LoadSettings()

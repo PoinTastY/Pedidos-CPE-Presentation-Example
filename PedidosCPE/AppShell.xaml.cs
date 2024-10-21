@@ -14,6 +14,7 @@ namespace PedidosCPE
             Routing.RegisterRoute(nameof(SearchProductosView), typeof(SearchProductosView));
             Routing.RegisterRoute(nameof(CreateDocumentoView), typeof(CreateDocumentoView));
             Routing.RegisterRoute(nameof(SearchClientesProveedoresView), typeof(SearchClientesProveedoresView));
+            Routing.RegisterRoute(nameof(DispatchDocumentosPendientesView), typeof(DispatchDocumentosPendientesView));
         }
     }
 }

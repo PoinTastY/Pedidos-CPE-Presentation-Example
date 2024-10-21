@@ -20,6 +20,7 @@ namespace Domain.Entities.Interface
         /// </summary>
         public string Fecha { get; set; } = string.Empty; //REQUIRED
         public string CodigoCteProv { get; set; }//
+        public string RazonSocial { get; set; } = string.Empty;//
         public string CodigoAgente { get; set; } = string.Empty;
         public string Referencia { get; set; }//
         public int Afecta { get; set; } = 0;
@@ -47,5 +48,7 @@ namespace Domain.Entities.Interface
             CodigoCteProv = settings.CodigoCteProv;
             Referencia = settings.Referencia;
         }
+
+        public Documento() { }
     }
 }

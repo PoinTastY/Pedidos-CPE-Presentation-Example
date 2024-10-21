@@ -14,5 +14,10 @@ namespace PedidosCPE
         {
             await Shell.Current.GoToAsync(nameof(CreateDocumentoView));
         }
+
+        private async void BtnVerPedidosPendientes_Clicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync(nameof(DispatchDocumentosPendientesView));
+        }
     }
 }
