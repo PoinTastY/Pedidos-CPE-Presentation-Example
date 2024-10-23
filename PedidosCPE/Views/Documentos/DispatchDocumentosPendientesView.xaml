@@ -11,6 +11,7 @@
 
     <StackLayout Orientation="Horizontal">
         <VerticalStackLayout>
+            <Button Text="Refrescar" x:Name="BtnRefresh" Clicked="BtnRefresh_Clicked" IsVisible="False"/>
             <SearchBar x:Name="searchBar" Placeholder="Buscar Documento..." SearchButtonPressed="searchBar_SearchButtonPressed"
                            TextChanged="searchBar_TextChanged" Margin="0,0,0,15"/>
             <ScrollView>

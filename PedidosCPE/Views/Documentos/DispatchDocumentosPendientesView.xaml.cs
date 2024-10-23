@@ -32,6 +32,8 @@ public partial class DispatchDocumentosPendientesView : ContentPage
             }
             catch (Exception ex)
             {
+                BtnRefresh.IsVisible = true;
+                _timer.Stop();
                 await DisplayAlert("Error", ex.Message, "Ok");
             }
         };
@@ -143,6 +145,11 @@ public partial class DispatchDocumentosPendientesView : ContentPage
         this.ShowPopup(popup);
         try
         {
+            var confirm = await DisplayAlert("Confirmar", $"¿Estás seguro de completar el pedido de {_viewModel.DocumentoSeleccionado.RazonSocial}?", "Si", "No");
+            if (!confirm)
+            {
+                return;
+            }
             await _viewModel.SaveDocumentAndMovementsOnSDK();
             BtnCompletarDocumento.IsVisible = false;
             //todo: then print a ticket
@@ -155,6 +162,27 @@ public partial class DispatchDocumentosPendientesView : ContentPage
         finally
         {
             popup.Close();
+        }
+    }
+
+    private async void BtnRefresh_Clicked(object sender, EventArgs e)
+    {
+        var popup = new SpinnerPopup();
+        this.ShowPopup(popup);
+        try
+        {
+            await _viewModel.LoadDocumentosPendientes();
+            await _viewModel.FetchMovimientosAndProductos();
+            _timer.Start();
+        }
+        catch (Exception ex)
+        {
+            _timer.Stop();
+            await DisplayAlert("Error", ex.Message, "Ok");
+        }
+        finally
+        {
+            BtnRefresh.IsVisible = false;
         }
     }
 }
