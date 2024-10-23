@@ -29,14 +29,17 @@
                     x:Name="BtnAgregarProducto"
                     Clicked="BtnAgregarProductos_Clicked"/>
             <CollectionView ItemsSource="{Binding Productos}"
-                    SelectionMode="None"
-                    HeightRequest="569">
+                            HeightRequest="569"
+                            SelectionMode="Single"
+                            x:Name="ListProductos"
+                            SelectionChanged="ListProductos_SelectionChanged">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <ContentView>
                             <!-- Personaliza tu vista de item aquí -->
                             <StackLayout Orientation="Horizontal" Padding="5">
-                                <Label Text="{Binding CNOMBREPRODUCTO}" VerticalOptions="Center"/>
+                                <Label Text="{Binding Producto.CNOMBREPRODUCTO, StringFormat='{0} '}" VerticalOptions="Center"/>
+                                <Label Text="{Binding Unidades}" VerticalOptions="Center"/>
                             </StackLayout>
                         </ContentView>
                     </DataTemplate>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup
+    x:Class="PedidosCPE.Views.Popups.GetUnidadesPopup"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    CanBeDismissedByTappingOutsideOfPopup="False"
+    Color="Transparent">
+    <Grid Padding="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Button Text="Quitar" Clicked="ButtonQuitar_Clicked" Grid.Row="0" Grid.Column="0"/>
+        <Label x:Name="LblProductoName" Grid.Row="0" TextColor="Red" Grid.Column="1"/>
+        <Entry x:Name="EntryUnidades" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" TextChanged="EntryUnidades_TextChanged" MinimumWidthRequest="150" MaximumWidthRequest="500"/>
+        <Button Text="Aceptar" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Clicked="ButtonAceptar_Clicked" HorizontalOptions="FillAndExpand"/>
+        <Label x:Name="LblError" IsVisible="False" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" />
+    </Grid>
+
+</toolkit:Popup>

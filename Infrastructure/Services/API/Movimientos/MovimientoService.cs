@@ -26,7 +26,7 @@ namespace Infrastructure.Services.API.Movimientos
             var response = await _client.PatchAsync("/Movimientos", content);
             if (!response.IsSuccessStatusCode)
             {
-                throw new Exception("Error al actualizar los movimientos");
+                throw new Exception($"Error al actualizar los movimientos: {response.ReasonPhrase}");
             }
         }
     }

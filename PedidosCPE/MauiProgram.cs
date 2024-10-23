@@ -81,6 +81,8 @@ namespace PedidosCPE
             builder.Services.AddTransient<VMCreateDocumento>();
             builder.Services.AddTransient<VMSearchClienteProveedor>();
             builder.Services.AddTransient<VMDispatchDocumentosPendientes>();
+            builder.Services.AddTransient<VMCaptureUnidades>();
+            builder.Services.AddTransient<VMUnidadesPopup>();
         }
 
         private static SDKSettings LoadSettings()

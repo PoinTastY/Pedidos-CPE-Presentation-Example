@@ -1,5 +1,6 @@
 ﻿using PedidosCPE.Views.ClientesProveedores;
 using PedidosCPE.Views.Documentos;
+using PedidosCPE.Views.Movimientos;
 using PedidosCPE.Views.Productos;
 
 namespace PedidosCPE
@@ -15,6 +16,7 @@ namespace PedidosCPE
             Routing.RegisterRoute(nameof(CreateDocumentoView), typeof(CreateDocumentoView));
             Routing.RegisterRoute(nameof(SearchClientesProveedoresView), typeof(SearchClientesProveedoresView));
             Routing.RegisterRoute(nameof(DispatchDocumentosPendientesView), typeof(DispatchDocumentosPendientesView));
+            Routing.RegisterRoute(nameof(CaptureUnidadesView), typeof(CaptureUnidadesView));
         }
     }
 }

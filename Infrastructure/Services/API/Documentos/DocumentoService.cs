@@ -13,13 +13,13 @@ namespace Infrastructure.Services.API.Documentos
             _client = client;
         }
 
-        public async Task<T> PostDocumentAndMovementsSDK<T>(T documento, List<T> movimientos)
+        public async Task<TDoc> PostDocumentAndMovementsSDK<TDoc, TMov>(TDoc documento, List<TMov> movimientos)
         {
             // Crear el payload para enviar al API, simulando la estructura de la API ( DocumentoConMovimientosDTO )
             var payload = new
             {
-                Document = documento,
-                Movements = movimientos
+                Documento = documento,
+                Movimientos = movimientos
             };
 
             // Serializar el payload a JSON
@@ -29,7 +29,7 @@ namespace Infrastructure.Services.API.Documentos
             var response = await _client.PostAsync("/DocumentosSDK", content);
 
             //Retornar desempaquetado
-            return await ApiTools.DeserializeResponse<T>(response);
+            return await ApiTools.DeserializeResponse<TDoc>(response);
         }
 
         public async Task<int> PostPendingDocumentAndMovementsPostgres<TDoc, TMov>(TDoc pedido, List<TMov> movimientos)
@@ -51,5 +51,11 @@ namespace Infrastructure.Services.API.Documentos
             return await ApiTools.DeserializeResponse<List<T>>(response);
         }
 
+        public async Task PutDocumento<T>(T documento)
+        {
+            var content = new StringContent(JsonConvert.SerializeObject(documento), Encoding.UTF8, "application/json");
+            var response = await _client.PutAsync("/Pendientes", content);
+            response.EnsureSuccessStatusCode();
+        }
     }
 }

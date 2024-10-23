@@ -1,5 +1,6 @@
 ﻿using ApplicationLayer.DTOs;
 using ApplicationLayer.ViewModels.Base;
+using ApplicationLayer.ViewModels.BindableObjects;
 using Domain.Entities.Interface;
 using Domain.Interfaces.Repos;
 using Domain.Interfaces.Services.ApiServices.Documentos;
@@ -28,8 +29,8 @@ namespace ApplicationLayer.ViewModels
                 OnPropertyChanged(nameof(Documento));
             }
         }
-        private ObservableCollection<ProductoDTO> _productos = new();
-        public ObservableCollection<ProductoDTO> Productos
+        private ObservableCollection<ViewProductoUnidades> _productos = new();
+        public ObservableCollection<ViewProductoUnidades> Productos
         {
             get => _productos;
             set
@@ -61,16 +62,27 @@ namespace ApplicationLayer.ViewModels
         }
         public VMCreateDocumento() { }
 
+        /// <summary>
+        /// Deberias hacer un pop despues de usar este metodo, claro, si sae bien
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public async Task EnviarDocumentoMovimientos()
         {
             if(_clienteProveedorSeleccionado.CCODIGOCLIENTE == null)
             {
                 throw new Exception("Debe seleccionar un cliente valido");
             }
+
+            //validamos y llenamos los movimientos
             var movimientos = new List<Movimiento>();
             foreach (var producto in Productos)
             {
-                movimientos.Add(new Movimiento(producto.CCODIGOPRODUCTO, _settings.CodigoAlmacen, 10, Documento.Referencia));
+                if (producto.Unidades == 0)
+                {
+                    throw new Exception($"El Producto {producto.Producto.CNOMBREPRODUCTO} tiene 0 unidades, porfavor captura las que falten");
+                }
+                movimientos.Add(new Movimiento(producto.Producto.CCODIGOPRODUCTO, _settings.CodigoAlmacen, producto.Unidades, Documento.Referencia));
             }
 
             Documento.RazonSocial = ClienteProveedorSeleccionado.CRAZONSOCIAL;

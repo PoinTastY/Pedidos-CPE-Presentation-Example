@@ -22,5 +22,10 @@
   "FiltrarClasif3Value": "ignore",
   "FiltrarClasif4Value": "ignore",
   "FiltrarClasif5Value": "ignore",
-  "FiltrarClasif6Value": "not"
+  "FiltrarClasif6Value": "not",
+  "PuertoBascula": "COM3",
+  "BaudRateBascula": 9600,
+  "DataBitsBascula": 8,
+  "WriteCommandBascula": "P",
+  "SufijoBascula":  "kg"
 }

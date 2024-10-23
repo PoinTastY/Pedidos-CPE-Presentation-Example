@@ -33,6 +33,8 @@
             </ScrollView>
         </VerticalStackLayout>
         <VerticalStackLayout>
+            <Button Text="Completar Pedido" x:Name="BtnCompletarDocumento"
+                    IsVisible="False" Clicked="BtnCompletarDocumento_Clicked"/>
             <CollectionView x:Name="productoSeleccionado" ItemsSource="{Binding ProductosUnidades}" Grid.Row="1"
                             SelectionMode="Single"
                             SelectionChanged="productoSeleccionado_SelectionChanged"
@@ -42,7 +44,8 @@
                         <ContentView>
                             <StackLayout Orientation="Horizontal" Padding="5">
                                 <Label Text="{Binding Producto.CNOMBREPRODUCTO}" VerticalOptions="Center"/>
-                                <Label Text="{Binding Unidades}" VerticalOptions="Center"/>
+                                <Label Text="{Binding Surtidas}" VerticalOptions="Center"/>
+                                <Label Text="{Binding Unidades, StringFormat='/{0}'}" VerticalOptions="Center"/>
                             </StackLayout>
                         </ContentView>
                     </DataTemplate>

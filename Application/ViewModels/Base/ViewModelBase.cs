@@ -19,5 +19,10 @@ namespace ApplicationLayer.ViewModels.Base
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(collectionName));
         }
+
+        public void RaisePropertyChanged(string propertyName)
+        {
+            OnPropertyChanged(propertyName);
+        }
     }
 }

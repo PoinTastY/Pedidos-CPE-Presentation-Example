@@ -5,13 +5,12 @@ namespace Domain.Interfaces.Services.ApiServices.Documentos
     public interface IDocumentoService
     {
         /// <summary>
-        /// Posts a document and its movements to the SDK
+        /// !!!must be DTOS!!! posts a document and its movements to the SDK
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T"> </typeparam>
         /// <param name="documentDTO"></param>
         /// <param name="movementsDTO"></param>
-        /// <returns></returns>
-        Task<T> PostDocumentAndMovementsSDK<T>(T documentDTO, List<T> movementsDTO);
+        Task<TDoc> PostDocumentAndMovementsSDK<TDoc, TMov>(TDoc documento, List<TMov> movimientos);
 
         /// <summary>
         /// 
@@ -26,8 +25,13 @@ namespace Domain.Interfaces.Services.ApiServices.Documentos
         /// Gets pending documents to work with them
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
         Task<List<T>> GetDocumentosPendientes<T>();
 
+        /// <summary>
+        /// Puts a document in the database (updates)
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="documento"></param>
+        Task PutDocumento<T>(T documento);
     }
 }

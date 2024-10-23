@@ -11,5 +11,6 @@ namespace ApplicationLayer.ViewModels.BindableObjects
     {
         public ProductoDTO Producto { get; set; } = new ProductoDTO();
         public double Unidades { get; set; }
+        public double Surtidas { get; set; }
     }
 }

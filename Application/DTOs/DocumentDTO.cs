@@ -1,6 +1,7 @@
 ﻿using Domain.Entities.ContpaqiComercial;
 using Domain.Entities.ContpaqiComercial.Estructuras;
 using Domain.Entities.Interface;
+using System.Globalization;
 
 namespace ApplicationLayer.DTOs
 {
@@ -127,7 +128,7 @@ namespace ApplicationLayer.DTOs
             aGasto2 = pedido.Gasto2;
             aGasto3 = pedido.Gasto3;
             CIDDOCUMENTO = pedido.IdContpaqiSQL;
-            CFECHA = DateTime.Parse(pedido.Fecha);
+            CFECHA = DateTime.ParseExact(pedido.Fecha, "MM/dd/yyyy", CultureInfo.InvariantCulture);
             COBSERVACIONES = pedido.Observaciones;
             CTEXTOEXTRA1 = pedido.TextoExtra1;
             CTEXTOEXTRA2 = pedido.TextoExtra2;

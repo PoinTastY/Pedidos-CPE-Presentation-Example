@@ -1,8 +1,11 @@
 using ApplicationLayer.ViewModels;
+using ApplicationLayer.ViewModels.BindableObjects;
 using CommunityToolkit.Maui.Views;
 using PedidosCPE.Views.ClientesProveedores;
 using PedidosCPE.Views.Events;
+using PedidosCPE.Views.Popups;
 using PedidosCPE.Views.Productos;
+using System.Collections.Specialized;
 
 namespace PedidosCPE.Views.Documentos;
 
@@ -26,11 +29,17 @@ public partial class CreateDocumentoView : ContentPage
             foreach (var producto in e.ProductosSeleccionados)
             {
                 //validate if the product is already in the list
-                if (_viewModel.Productos.Any(p => p.CIDPRODUCTO == producto.CIDPRODUCTO))
+                if (_viewModel.Productos.Any(p => p.Producto.CIDPRODUCTO == producto.CIDPRODUCTO))
                 {
                     continue;
                 }
-                _viewModel.Productos.Add(producto);
+                var productoUnidades = new ViewProductoUnidades
+                {
+                    Producto = producto,
+                    Unidades = 0,
+                    Surtidas = 0
+                };
+                _viewModel.Productos.Add(productoUnidades);
             }
             await Shell.Current.Navigation.PopAsync();
         }
@@ -88,5 +97,49 @@ public partial class CreateDocumentoView : ContentPage
         var clientes = new SearchClientesProveedoresView();
         clientes.ClienteProveedorSeleccionado += OnClienteProveedorSelected;
         await Shell.Current.Navigation.PushAsync(clientes);
+    }
+
+    private async void ListProductos_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (ListProductos.SelectedItem == null)
+        {
+            return;
+        }
+
+        try
+        {
+            var productoSeleccionado = (ViewProductoUnidades)ListProductos.SelectedItem;
+            if (productoSeleccionado != null)
+            {
+                var popup = new GetUnidadesPopup(productoSeleccionado);
+
+                // Suscríbete al evento UnidadesCapturadas
+                popup.UnidadesCapturadas += (s, eventArgs) =>
+                {
+                    if(eventArgs.Quitar)
+                    {
+                        _viewModel.Productos.Remove(productoSeleccionado);
+                        return;
+                    }
+                    // Asigna el valor capturado a las unidades del producto
+                    productoSeleccionado.Unidades = eventArgs.Unidades;
+
+                    // Notifica el cambio en la colección
+                    var index = _viewModel.Productos.IndexOf(productoSeleccionado);
+                    if (index >= 0)
+                    {
+                        _viewModel.Productos[index] = productoSeleccionado; // Esto asegura que la UI se actualice.
+                    }
+                };
+
+                // Muestra el popup
+                await this.ShowPopupAsync(popup);
+
+            }
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error", ex.Message, "Ok");
+        }
     }
 }
