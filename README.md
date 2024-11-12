@@ -1,0 +1,1 @@
+esta aplicacion consume la api que desarrolle para la gestion propia de documentos, y el consumo del sdk de Contpaqi Comercial, todo centralizado en la API, y esta app solo consume la api, no hay frontend, fue solo para presentar la capacidad, y ya se pacto otro proytecto para una solucion real, pero ya es un repositorio privado
